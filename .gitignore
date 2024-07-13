@@ -1,0 +1,67 @@
+# Xcode
+.DS_Store
+*.swp
+*.xcuserstate
+*.xcworkspace
+*.lock
+*~.nib
+*.orig
+*.plist
+
+# User-specific files
+xcuserdata/
+
+# Build artifacts
+build/
+DerivedData/
+
+# Index files
+*.xcindex
+
+# Swift Package Manager
+.swiftpm/
+.build/
+Package.resolved
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots/
+*/fastlane/test_output/
+
+# Temporary files
+*.moved-aside
+
+# AppCode
+.idea/
+
+# Xcode Archive
+*.xcarchive
+
+# Symbols
+*.dSYM.zip
+*.dSYM
+
+# Provisioning Profiles
+*.mobileprovision
+
+# Logs
+*.log
+
+# Code Injection
+ci/
+
+# Env files
+.env
+.env
