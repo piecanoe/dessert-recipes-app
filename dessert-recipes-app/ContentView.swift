@@ -11,13 +11,25 @@ struct ContentView: View {
     @State private var dessertItem: DessertItem?
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        HStack{
+            
+            AsyncImage(url: URL(string: dessertItem?.strMealThumb ?? "")) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .clipShape(Circle())
+            } placeholder: {
+                Circle()
+                    .foregroundColor(.secondary)
+            }
+            .frame(width:120, height: 120)
+            
+            Spacer()
+            
+            Text(dessertItem?.strMeal ?? "placeholder")
+            
         }
-        .padding()
+        .padding(10)
         .task {
             do {
                 dessertItem = try await getDessert()
@@ -80,5 +92,5 @@ struct ContentView: View {
         case invalidResponse
         case invalidData
     }
-}
+
 
