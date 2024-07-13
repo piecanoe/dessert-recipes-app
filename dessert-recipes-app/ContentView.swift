@@ -24,3 +24,13 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+struct Wrapper: Codable {
+    let meals: [DessertItem]
+}
+
+struct DessertItem: Codable {
+    let strMeal: String
+    let strMealThumb: String
+    let idMeal: String
+}
