@@ -76,21 +76,6 @@ struct ContentView: View {
             ContentView()
         }
     }
-    
-    struct Wrapper: Codable {
-        let meals: [DessertItem]
-    }
-    
-    struct DessertItem: Codable {
-        let strMeal: String
-        let strMealThumb: String
-        let idMeal: String
-    }
-    
-    enum GetDessertError: Error {
-        case invalidURL
-        case invalidResponse
-        case invalidData
-    }
+
 
 
