@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var dessertItem: DessertItem?
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -16,7 +18,21 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+        .task {
+            do {
+                dessertItem = try await getDessert()
+            } catch GetDessertError.invalidURL {
+                print("invalid URL")
+            } catch GetDessertError.invalidResponse {
+                print("invalid response")
+            } catch GetDessertError.invalidData {
+                print("invalid data")
+            } catch {
+                print ("unexpected error")
+            }
+        }
     }
+}
     
     func getDessert() async throws -> DessertItem {
         let endpoint = "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert"
