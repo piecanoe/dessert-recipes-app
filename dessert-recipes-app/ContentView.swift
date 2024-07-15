@@ -24,28 +24,25 @@ struct ContentView: View {
             }
             .navigationTitle("Desserts")
             .onAppear {
-                fetchDessertItems()
+                Task {
+                    do {
+                        dessertItems = try await fetchDessert()
+                    } catch GetDessertError.invalidURL {
+                        print("Invalid URL")
+                    } catch GetDessertError.invalidResponse {
+                        print("Invalid response")
+                    } catch GetDessertError.invalidData {
+                        print("Invalid data")
+                    } catch {
+                        print("Unexpected error: \(error.localizedDescription)")
+                    }
+                }
             }
         }
     }
 
-    func fetchDessertItems() {
-        Task {
-            do {
-                dessertItems = try await getDessert()
-            } catch GetDessertError.invalidURL {
-                print("Invalid URL")
-            } catch GetDessertError.invalidResponse {
-                print("Invalid response")
-            } catch GetDessertError.invalidData {
-                print("Invalid data")
-            } catch {
-                print("Unexpected error: \(error.localizedDescription)")
-            }
-        }
-    }
 
-    func getDessert() async throws -> [DessertItem] {
+    func fetchDessert() async throws -> [DessertItem] {
         let endpoint = "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert"
         
         guard let url = URL(string: endpoint) else {
