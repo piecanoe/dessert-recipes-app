@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE729C1C2C44D1C8005EEDDD /* fetchDessert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE729C1B2C44D1C8005EEDDD /* fetchDessert.swift */; };
 		BEB7ADD12C43284800A2E61A /* dessert_recipes_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB7ADD02C43284800A2E61A /* dessert_recipes_appApp.swift */; };
 		BEB7ADD32C43284800A2E61A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB7ADD22C43284800A2E61A /* ContentView.swift */; };
 		BEB7ADD52C43284900A2E61A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEB7ADD42C43284900A2E61A /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE729C1B2C44D1C8005EEDDD /* fetchDessert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchDessert.swift; sourceTree = "<group>"; };
 		BEB7ADCD2C43284800A2E61A /* dessert-recipes-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dessert-recipes-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB7ADD02C43284800A2E61A /* dessert_recipes_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dessert_recipes_appApp.swift; sourceTree = "<group>"; };
 		BEB7ADD22C43284800A2E61A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				BEB7ADD22C43284800A2E61A /* ContentView.swift */,
 				BEB7ADDE2C43318300A2E61A /* DessertItem.swift */,
 				BEB7ADE02C43319F00A2E61A /* GetDessertError.swift */,
+				BE729C1B2C44D1C8005EEDDD /* fetchDessert.swift */,
 				BEB7ADD42C43284900A2E61A /* Assets.xcassets */,
 				BEB7ADD62C43284900A2E61A /* Preview Content */,
 			);
@@ -146,6 +149,7 @@
 				BEB7ADE12C43319F00A2E61A /* GetDessertError.swift in Sources */,
 				BEB7ADDF2C43318300A2E61A /* DessertItem.swift in Sources */,
 				BEB7ADD32C43284800A2E61A /* ContentView.swift in Sources */,
+				BE729C1C2C44D1C8005EEDDD /* fetchDessert.swift in Sources */,
 				BEB7ADD12C43284800A2E61A /* dessert_recipes_appApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
