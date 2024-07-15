@@ -1,52 +1,51 @@
-//
-//  ContentView.swift
-//  dessert-recipes-app
-//
-//  Created by Karen Du on 7/13/24.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-    @State private var dessertItem: DessertItem?
-    
+    @State private var dessertItems: [DessertItem] = []
+
     var body: some View {
-        HStack{
-            
-            AsyncImage(url: URL(string: dessertItem?.strMealThumb ?? "")) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .clipShape(Circle())
-            } placeholder: {
-                Circle()
-                    .foregroundColor(.secondary)
+        NavigationView {
+            List(dessertItems, id: \.idMeal) { item in
+                HStack {
+                    Text(item.strMeal)
+                    Spacer()
+                    AsyncImage(url: URL(string: item.strMealThumb)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 50, height: 50)
+                    } placeholder: {
+                        Rectangle()
+                            .foregroundColor(.gray)
+                            .frame(width: 50, height: 50)
+                    }
+                    .frame(width: 50, height: 50)
+                }
             }
-            .frame(width:120, height: 120)
-            
-            Spacer()
-            
-            Text(dessertItem?.strMeal ?? "placeholder")
-            
-        }
-        .padding(10)
-        .task {
-            do {
-                dessertItem = try await getDessert()
-            } catch GetDessertError.invalidURL {
-                print("invalid URL")
-            } catch GetDessertError.invalidResponse {
-                print("invalid response")
-            } catch GetDessertError.invalidData {
-                print("invalid data")
-            } catch {
-                print ("unexpected error")
+            .navigationTitle("Desserts")
+            .onAppear {
+                fetchDessertItems()
             }
         }
     }
-}
-    
-    func getDessert() async throws -> DessertItem {
+
+    func fetchDessertItems() {
+        Task {
+            do {
+                dessertItems = try await getDessert()
+            } catch GetDessertError.invalidURL {
+                print("Invalid URL")
+            } catch GetDessertError.invalidResponse {
+                print("Invalid response")
+            } catch GetDessertError.invalidData {
+                print("Invalid data")
+            } catch {
+                print("Unexpected error: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    func getDessert() async throws -> [DessertItem] {
         let endpoint = "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert"
         
         guard let url = URL(string: endpoint) else {
@@ -55,27 +54,20 @@ struct ContentView: View {
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw GetDessertError.invalidResponse
         }
         
-        do {
-            let decoder = JSONDecoder()
-            let wrapper = try decoder.decode(Wrapper.self, from: data)
-            guard let firstDessert = wrapper.meals.first else {
-                throw GetDessertError.invalidData
-            }
-            return firstDessert
-        } catch {
-            throw GetDessertError.invalidData
-        }
+        let decoder = JSONDecoder()
+        let wrapper = try decoder.decode(Wrapper.self, from: data)
+        
+        return wrapper.meals
     }
-    
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            ContentView()
-        }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
-
-
+}
 
