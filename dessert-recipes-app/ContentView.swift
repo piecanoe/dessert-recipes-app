@@ -6,21 +6,21 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List(dessertItems, id: \.idMeal) { item in
-                HStack {
-                    Text(item.strMeal)
-                    Spacer()
-                    AsyncImage(url: URL(string: item.strMealThumb)) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                    } placeholder: {
-                        Rectangle()
-                            .foregroundColor(.gray)
-                            .frame(width: 50, height: 50)
+                    HStack {
+                        Text(item.strMeal)
+                        Spacer()
+                        AsyncImage(url: URL(string: item.strMealThumb)) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 50, height: 50)
+                        } placeholder: {
+                            Rectangle()
+                                .foregroundColor(.gray)
+                                .frame(width: 50, height: 50)
+                        }
+                        .frame(width: 50, height: 50)
                     }
-                    .frame(width: 50, height: 50)
-                }
             }
             .navigationTitle("Desserts")
             .onAppear {
