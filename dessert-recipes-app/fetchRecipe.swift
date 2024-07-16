@@ -14,7 +14,7 @@ enum GetRecipeError: Error {
 }
 
 func fetchRecipe(for idMeal:String) async throws -> [Recipe] {
-    let apiKey = "https://themealdb.com/api/json/v1/1/lookup.php?i\(idMeal)"
+    let apiKey = "https://themealdb.com/api/json/v1/1/lookup.php?i=\(idMeal)"
     
     guard let url = URL(string: apiKey) else {
         throw GetRecipeError.invalidURL
