@@ -2,25 +2,36 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var dessertItems: [DessertItem] = []
-
+    @State private var recipe: [Recipe] = []
+    
     var body: some View {
-        NavigationView {
-            List(dessertItems, id: \.idMeal) { item in
-                    HStack {
-                        Text(item.strMeal)
-                        Spacer()
-                        AsyncImage(url: URL(string: item.strMealThumb)) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
+        NavigationStack{
+            List {
+                Section("Desserts"){
+                    ForEach (dessertItems, id: \.idMeal) {item in
+                        NavigationLink(value: item){
+                            HStack {
+                                Text(item.strMeal)
+                                Spacer()
+                                AsyncImage(url: URL(string: item.strMealThumb)) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 50, height: 50)
+                                } placeholder: {
+                                    Rectangle()
+                                        .foregroundColor(.gray)
+                                        .frame(width: 50, height: 50)
+                                }
                                 .frame(width: 50, height: 50)
-                        } placeholder: {
-                            Rectangle()
-                                .foregroundColor(.gray)
-                                .frame(width: 50, height: 50)
+                            }
                         }
-                        .frame(width: 50, height: 50)
                     }
+                }
+                
+            }
+            .navigationDestination(for: DessertItem.self){recipe in
+                Text("\(recipe.strMeal)")
             }
             .navigationTitle("Desserts")
             .onAppear {
@@ -39,7 +50,11 @@ struct ContentView: View {
                 }
             }
         }
+        
+        
     }
+    
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -47,4 +62,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-

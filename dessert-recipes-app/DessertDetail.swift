@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct DessertDetail: View {
+//    let dessertItem: DessertItem
+//
     var body: some View {
-        Text("Dessert Detail")
+        Text("hello")
     }
 }
 
