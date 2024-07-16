@@ -3,7 +3,7 @@
 //  dessert-recipes-app
 //
 //  Created by Karen Du on 7/14/24.
-//
+
 
 import Foundation
 
@@ -55,6 +55,6 @@ struct Recipe: Codable, Identifiable, Hashable {
     let strMeasure18: String
     let strMeasure19: String
     let strMeasure20: String
-    
+
     var id: String { idMeal }
 }

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var dessertItems: [DessertItem] = []
-    @State private var recipe: [Recipe] = []
+    @State private var recipes: [Recipe] = []
     
     var body: some View {
         NavigationStack{
@@ -10,8 +10,9 @@ struct ContentView: View {
                 Section("Desserts"){
                     ForEach (dessertItems, id: \.idMeal) {item in
                         NavigationLink(value: item){
-                            HStack {
+                            HStack{
                                 Text(item.strMeal)
+                                    .foregroundColor(Color.red)
                                 Spacer()
                                 AsyncImage(url: URL(string: item.strMealThumb)) { image in
                                     image
@@ -30,10 +31,35 @@ struct ContentView: View {
                 }
                 
             }
-            .navigationDestination(for: DessertItem.self){recipe in
-                Text("\(recipe.strMeal)")
+            .navigationTitle("Recipe App")
+            .navigationDestination(for: DessertItem.self) {item in
+                
+                    Label(item.strMeal, systemImage: item.strMealThumb)
+                        .font(.largeTitle).bold()
+                    Section("Recipes") {
+                        ForEach(recipes, id: \.idMeal) { recipe in
+                            VStack(alignment: .leading) {
+                                Text(recipe.strMeal)
+                                    .font(.headline)
+                                Text(recipe.strInstructions)
+                                    .font(.body)
+                            }
+                            .padding()
+                            .background(Color.gray.opacity(0.1))
+                            .cornerRadius(10)
+                            .padding(.vertical, 5)
+                        }
+                    }
+                    .onAppear{
+                        Task {
+                            for item in dessertItems {
+                                let recipe = try await fetchRecipe(for: item.idMeal)
+                                recipes.append(contentsOf: recipe)
+                            }
+                        }
+                    }
+
             }
-            .navigationTitle("Desserts")
             .onAppear {
                 Task {
                     do {
@@ -51,10 +77,7 @@ struct ContentView: View {
             }
         }
         
-        
     }
-    
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
