@@ -14,16 +14,16 @@ enum GetRecipeError: Error {
 }
 
 func fetchRecipe(for idMeal:String) async throws -> [Recipe] {
-    let endpoint = "https://themealdb.com/api/json/v1/1/lookup.php?i\(idMeal)"
+    let apiKey = "https://themealdb.com/api/json/v1/1/lookup.php?i\(idMeal)"
     
-    guard let url = URL(string: endpoint) else {
+    guard let url = URL(string: apiKey) else {
         throw GetRecipeError.invalidURL
     }
     
     let (data, response ) = try await
     URLSession.shared.data(from: url)
     
-    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+    guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
         throw GetDessertError.invalidResponse
     }
     
