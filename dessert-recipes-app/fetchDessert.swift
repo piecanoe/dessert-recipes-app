@@ -14,20 +14,20 @@ enum GetDessertError: Error {
 }
 
 func fetchDessert() async throws -> [DessertItem] {
-    let endpoint = "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert"
+    let apiKey = "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert"
     
-    guard let url = URL(string: endpoint) else {
+    guard let url = URL(string: apiKey) else {
         throw GetDessertError.invalidURL
     }
     
     let (data, response) = try await URLSession.shared.data(from: url)
     
-    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+    guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
         throw GetDessertError.invalidResponse
     }
     
     let decoder = JSONDecoder()
-    let wrapper = try decoder.decode(Wrapper.self, from: data)
+    let wrapper = try decoder.decode(DessertsWrapper.self, from: data)
     
     return wrapper.meals
 }
