@@ -32,3 +32,4 @@ func fetchRecipe(for idMeal:String) async throws -> [Recipe] {
     return wrapper.meals
     
 }
+

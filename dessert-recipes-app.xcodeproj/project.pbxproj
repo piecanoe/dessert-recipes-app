@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE01D0D02C4880DE00B70EB5 /* DessertDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE01D0CF2C4880DE00B70EB5 /* DessertDetailView.swift */; };
 		BE729C1C2C44D1C8005EEDDD /* fetchDessert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE729C1B2C44D1C8005EEDDD /* fetchDessert.swift */; };
 		BE729C202C44D688005EEDDD /* fetchRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE729C1F2C44D688005EEDDD /* fetchRecipe.swift */; };
 		BE729C222C44D7F8005EEDDD /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE729C212C44D7F8005EEDDD /* RecipeViewModel.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE01D0CF2C4880DE00B70EB5 /* DessertDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertDetailView.swift; sourceTree = "<group>"; };
 		BE729C1B2C44D1C8005EEDDD /* fetchDessert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchDessert.swift; sourceTree = "<group>"; };
 		BE729C1F2C44D688005EEDDD /* fetchRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchRecipe.swift; sourceTree = "<group>"; };
 		BE729C212C44D7F8005EEDDD /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			children = (
 				BEB7ADD02C43284800A2E61A /* dessert_recipes_appApp.swift */,
 				BEB7ADD22C43284800A2E61A /* ContentView.swift */,
+				BE01D0CF2C4880DE00B70EB5 /* DessertDetailView.swift */,
 				BEB7ADDE2C43318300A2E61A /* DessertItem.swift */,
 				BE729C212C44D7F8005EEDDD /* RecipeViewModel.swift */,
 				BE729C1B2C44D1C8005EEDDD /* fetchDessert.swift */,
@@ -151,6 +154,7 @@
 			files = (
 				BE729C202C44D688005EEDDD /* fetchRecipe.swift in Sources */,
 				BEB7ADDF2C43318300A2E61A /* DessertItem.swift in Sources */,
+				BE01D0D02C4880DE00B70EB5 /* DessertDetailView.swift in Sources */,
 				BE729C222C44D7F8005EEDDD /* RecipeViewModel.swift in Sources */,
 				BEB7ADD32C43284800A2E61A /* ContentView.swift in Sources */,
 				BE729C1C2C44D1C8005EEDDD /* fetchDessert.swift in Sources */,
