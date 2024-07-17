@@ -33,14 +33,15 @@ struct ContentView: View {
             }
             .navigationTitle("Recipe App")
             .navigationDestination(for: DessertItem.self) {item in
-                
-                    Label(item.strMeal, systemImage: item.strMealThumb)
-                        .font(.largeTitle).bold()
-                    Section("Recipes") {
+                VStack{
+                    Section(item.strMeal) {
                         ForEach(recipes, id: \.idMeal) { recipe in
                             VStack(alignment: .leading) {
-                                Text(recipe.strMeal)
-                                    .font(.headline)
+                                
+                                Text("Ingredients")
+                                Text(recipe.strIngredient1)
+                                    .font(.body)
+                                Text("Instructions")
                                 Text(recipe.strInstructions)
                                     .font(.body)
                             }
@@ -50,6 +51,7 @@ struct ContentView: View {
                             .padding(.vertical, 5)
                         }
                     }
+                    .font(.largeTitle).bold()
                     .onAppear{
                         Task {
                             for item in dessertItems {
@@ -58,6 +60,10 @@ struct ContentView: View {
                             }
                         }
                     }
+                    .onDisappear{
+                        recipes.removeAll()
+                    }
+                }
 
             }
             .onAppear {

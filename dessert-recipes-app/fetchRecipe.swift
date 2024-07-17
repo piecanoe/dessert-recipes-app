@@ -3,7 +3,6 @@
 //  dessert-recipes-app
 //
 //  Created by Karen Du on 7/14/24.
-//
 
 import Foundation
 
