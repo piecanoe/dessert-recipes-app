@@ -3,6 +3,10 @@ import SwiftUI
 struct ContentView: View {
     @State private var dessertItems: [DessertItem] = []
     @State private var recipes: [Recipe] = []
+    @State private var selectedItem: DessertItem?
+    @State private var recipesByDessertItem: [String: [Recipe]] = [:]
+    
+    
     
     var body: some View {
         NavigationStack{
@@ -34,37 +38,34 @@ struct ContentView: View {
             .navigationTitle("Recipe App")
             .navigationDestination(for: DessertItem.self) {item in
                 VStack{
-                    Section(item.strMeal) {
-                        ForEach(recipes, id: \.idMeal) { recipe in
-                            VStack(alignment: .leading) {
-                                
-                                Text("Ingredients")
-                                Text(recipe.strIngredient1)
-                                    .font(.body)
-                                Text("Instructions")
-                                Text(recipe.strInstructions)
-                                    .font(.body)
+                    Section() {
+                        if let recipes = recipesByDessertItem[item.idMeal] {
+                            ForEach(recipes, id: \.idMeal) { recipe in
+                                VStack(alignment: .leading) {
+                                    Text("Ingredients: \(recipe.strIngredient1 ?? "")")
+                                        .font(.body)
+                                    Text("Instructions: \(recipe.strInstructions)")
+                                        .font(.body)
+                                }
+                                .padding()
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(10)
+                                .padding(.vertical, 5)
                             }
-                            .padding()
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(10)
-                            .padding(.vertical, 5)
+                        } else {
+                            ProgressView()
+                                .onAppear {
+                                    Task {
+                                        await loadRecipes(for: item)
+                                    }
+                                }
                         }
                     }
                     .font(.largeTitle).bold()
-                    .onAppear{
-                        Task {
-                            for item in dessertItems {
-                                let recipe = try await fetchRecipe(for: item.idMeal)
-                                recipes.append(contentsOf: recipe)
-                            }
-                        }
-                    }
-                    .onDisappear{
-                        recipes.removeAll()
-                    }
                 }
-
+                .navigationTitle(item.strMeal)
+                
+                
             }
             .onAppear {
                 Task {
@@ -84,6 +85,16 @@ struct ContentView: View {
         }
         
     }
+    private func loadRecipes(for item: DessertItem) async {
+        do {
+            let fetchedRecipes = try await fetchRecipe(for: item.idMeal)
+            DispatchQueue.main.async {
+                recipesByDessertItem[item.idMeal] = fetchedRecipes
+            }
+        } catch {
+            print("Failed to fetch recipes: \(error)")
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -91,3 +102,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
