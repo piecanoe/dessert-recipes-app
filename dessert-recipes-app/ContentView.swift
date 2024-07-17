@@ -14,6 +14,7 @@ struct ContentView: View {
                 VStack{
                     Text("Dessert Recipes")
                         .font(.title)
+                        .fontWeight(.bold)
                     List {
                         Section{
                             ForEach (dessertItems, id: \.idMeal) {item in
@@ -40,7 +41,6 @@ struct ContentView: View {
                     }
                     .scrollContentBackground(.hidden)
                 }
-                
             }
         }
         .onAppear {
@@ -59,10 +59,6 @@ struct ContentView: View {
             }
         }
     }
-    
-    
-    
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
