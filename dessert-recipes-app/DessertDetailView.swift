@@ -10,7 +10,7 @@ import SwiftUI
 
 struct DessertDetailView: View {
     @State private var recipesByDessertItem: [String: [Recipe]] = [:]
-        let item: DessertItem
+    let item: DessertItem
     
     var body: some View {
         ZStack{
@@ -39,24 +39,18 @@ struct DessertDetailView: View {
                                     Text("Ingredients:")
                                         .font(.title3)
                                         .padding([.bottom],20)
-                                    HStack{
-                                        VStack(alignment:.leading){
-                                            ForEach(recipe.measures, id: \.self) { measure in
+                                    VStack {
+                                        ForEach(Array(zip(recipe.measures, recipe.ingredients)), id: \.0) { (measure, ingredient) in
+                                            HStack{
                                                 Text(measure)
                                                     .font(.body)
                                                     .lineLimit(1)
-                                            }
-                                        }
-                                        Spacer()
-                                        VStack(alignment:.leading){
-                                            ForEach(recipe.ingredients, id: \.self) { ingredient in
+                                                Spacer()
                                                 Text(ingredient)
                                                     .font(.body)
                                                     .lineLimit(1)
                                             }
                                         }
-                                        Spacer()
-                                        
                                     }
                                     .padding([.bottom],20)
                                     
@@ -66,7 +60,6 @@ struct DessertDetailView: View {
                                     Text(recipe.strInstructions)
                                         .font(.body)
                                 }
-                                
                                 
                             }
                         } else {
@@ -100,3 +93,5 @@ struct DessertDetailView: View {
         }
     }
 }
+
+
